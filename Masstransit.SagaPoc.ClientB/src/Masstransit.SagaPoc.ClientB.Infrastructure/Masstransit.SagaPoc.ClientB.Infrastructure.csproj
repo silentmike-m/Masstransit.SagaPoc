@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>10.0</LangVersion>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="MediatR" />
+    <Using Include="Microsoft.Extensions.Logging" />
+    <Using Include="System.Text.Json.Serialization" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.15" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Masstransit.SagaPoc.ClientB.Application\Masstransit.SagaPoc.ClientB.Application.csproj" />
+    <ProjectReference Include="..\Masstransit.SagaPoc.Shared\Masstransit.SagaPoc.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
