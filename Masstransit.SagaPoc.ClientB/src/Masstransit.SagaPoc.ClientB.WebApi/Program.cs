@@ -12,7 +12,9 @@ builder.Configuration
     .AddEnvironmentVariables("CONFIG_");
 
 builder.Host.UseSerilog((ctx, lc) => lc
-    .ReadFrom.Configuration(builder.Configuration));
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.WithProperty(nameof(ServiceConstants.ServiceName), ServiceConstants.ServiceName)
+    .Enrich.WithProperty(nameof(ServiceConstants.ServiceVersion), ServiceConstants.ServiceVersion));
 
 builder.Services.AddApplication();
 

@@ -5,10 +5,13 @@
         <TargetFramework>net6.0</TargetFramework>
         <LangVersion>10.0</LangVersion>
         <Nullable>enable</Nullable>
+        <Company>Silent Mike</Company>
+        <Product>MassTransit-SagaPoC-Publisher</Product>
     </PropertyGroup>
 
     <ItemGroup>
         <Using Include="MediatR" />
+        <Using Include="Masstransit.SagaPoc.Publisher.Application.Shared" />
     </ItemGroup>
 
     <ItemGroup>

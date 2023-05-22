@@ -5,6 +5,8 @@
         <TargetFramework>net6.0</TargetFramework>
         <LangVersion>10.0</LangVersion>
         <Nullable>enable</Nullable>
+        <Company>Silent Mike</Company>
+        <Product>MassTransit-SagaPoC-Publisher</Product>
     </PropertyGroup>
 
 </Project>

@@ -5,6 +5,8 @@
         <TargetFramework>net6.0</TargetFramework>
         <LangVersion>10.0</LangVersion>
         <Nullable>enable</Nullable>
+        <Company>Silent Mike</Company>
+        <Product>MassTransit-SagaPoC-ClientA</Product>
     </PropertyGroup>
 
     <ItemGroup>
@@ -19,8 +21,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Masstransit.SagaPoc.ClientA.Application\Masstransit.SagaPoc.ClientA.Application.csproj" />
-      <ProjectReference Include="..\Masstransit.SagaPoc.Shared\Masstransit.SagaPoc.Shared.csproj" />
+        <ProjectReference Include="..\Masstransit.SagaPoc.ClientA.Application\Masstransit.SagaPoc.ClientA.Application.csproj" />
+        <ProjectReference Include="..\Masstransit.SagaPoc.Shared\Masstransit.SagaPoc.Shared.csproj" />
     </ItemGroup>
 
 </Project>

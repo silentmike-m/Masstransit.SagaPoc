@@ -5,10 +5,13 @@
         <TargetFramework>net6.0</TargetFramework>
         <LangVersion>10.0</LangVersion>
         <Nullable>enable</Nullable>
+        <Company>Silent Mike</Company>
+        <Product>MassTransit-SagaPoC-ClientB</Product>
     </PropertyGroup>
 
     <ItemGroup>
         <Using Include="MediatR" />
+        <Using Include="Masstransit.SagaPoc.ClientB.Application.Shared" />
     </ItemGroup>
 
     <ItemGroup>
@@ -18,7 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Masstransit.SagaPoc.ClientB.Infrastructure\Masstransit.SagaPoc.ClientB.Infrastructure.csproj" />
+        <ProjectReference Include="..\Masstransit.SagaPoc.ClientB.Infrastructure\Masstransit.SagaPoc.ClientB.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

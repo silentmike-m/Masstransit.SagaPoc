@@ -1,0 +1,76 @@
+#30000 - publisher
+#30001 - client A
+#30002 - client B
+
+name: poc
+network: localdev
+services:
+  - name: publisher
+    project: Masstransit.SagaPoc.Publisher/src/Masstransit.SagaPoc.Publisher.WebApi/Masstransit.SagaPoc.Publisher.WebApi.csproj
+    buildProperties:
+      - name: Configuration
+        value: Release
+    env:
+      - name: CONFIG_RABBITMQ__HOSTNAME
+        value: localhost   
+      - name: CONFIG_RABBITMQ__PASSWORD
+        value: P@ssw0rd          
+      - name: CONFIG_RABBITMQ__USER
+        value: user
+      - name: CONFIG_RABBITMQ__VIRTUALHOST
+        value: /        
+      - name: SERILOG__WRITETO__1__NAME
+        value: Seq
+      - name: SERILOG__WRITETO__1__ARGS__HOSTNAMEORADDRESS
+        value: localhost
+      - name: SERILOG__WRITETO__1__ARGS__PORT
+        value: 9000
+    bindings:
+    - port: 30000
+      protocol: http
+  - name: clientA
+    project: Masstransit.SagaPoc.ClientA/src/Masstransit.SagaPoc.ClientA.WebApi/Masstransit.SagaPoc.ClientA.WebApi.csproj
+    buildProperties:
+      - name: Configuration
+        value: Release
+    env:
+      - name: CONFIG_RABBITMQ__HOSTNAME
+        value: localhost   
+      - name: CONFIG_RABBITMQ__PASSWORD
+        value: P@ssw0rd          
+      - name: CONFIG_RABBITMQ__USER
+        value: user
+      - name: CONFIG_RABBITMQ__VIRTUALHOST
+        value: /        
+      - name: SERILOG__WRITETO__1__NAME
+        value: Seq
+      - name: SERILOG__WRITETO__1__ARGS__HOSTNAMEORADDRESS
+        value: localhost
+      - name: SERILOG__WRITETO__1__ARGS__PORT
+        value: 9000
+    bindings:
+    - port: 30001
+      protocol: http
+  - name: clientA
+    project: Masstransit.SagaPoc.ClientB/src/Masstransit.SagaPoc.ClientB.WebApi/Masstransit.SagaPoc.ClientB.WebApi.csproj
+    buildProperties:
+      - name: Configuration
+        value: Release
+    env:
+      - name: CONFIG_RABBITMQ__HOSTNAME
+        value: localhost   
+      - name: CONFIG_RABBITMQ__PASSWORD
+        value: P@ssw0rd          
+      - name: CONFIG_RABBITMQ__USER
+        value: user
+      - name: CONFIG_RABBITMQ__VIRTUALHOST
+        value: /        
+      - name: SERILOG__WRITETO__1__NAME
+        value: Seq
+      - name: SERILOG__WRITETO__1__ARGS__HOSTNAMEORADDRESS
+        value: localhost
+      - name: SERILOG__WRITETO__1__ARGS__PORT
+        value: 9000
+    bindings:
+    - port: 30002
+      protocol: http
