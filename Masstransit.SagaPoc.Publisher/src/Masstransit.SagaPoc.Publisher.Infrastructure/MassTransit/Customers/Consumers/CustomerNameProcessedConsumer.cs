@@ -20,7 +20,7 @@ internal sealed class CustomerNameProcessedConsumer : IConsumer<ICustomerNamePro
     {
         this.logger.LogInformation("Receiver customer with id {CustomerId} name processed message", context.Message.Id);
 
-        var customerToUpdate = new CustomerToUpdateName()
+        var customerToUpdate = new CustomerToUpdateName
         {
             FirstName = context.Message.FirstName,
             Id = context.Message.Id,

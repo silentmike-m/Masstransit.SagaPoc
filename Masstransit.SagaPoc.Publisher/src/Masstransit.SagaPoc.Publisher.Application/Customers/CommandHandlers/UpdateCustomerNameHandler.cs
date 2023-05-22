@@ -34,6 +34,8 @@ internal sealed class UpdateCustomerNameHandler : IRequestHandler<UpdateCustomer
 
         this.repository.Save(customer);
 
+        this.logger.LogInformation("Customer has been saved");
+
         await Task.CompletedTask;
     }
 }
