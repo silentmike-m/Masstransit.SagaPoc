@@ -9,7 +9,7 @@ volumes:
     external: true
 services:
   rabbitmq:
-    image: rabbitmq:3.9.1
+    image: rabbitmq:3.9.1-management
     restart: unless-stopped
     volumes:
       - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
