@@ -1,5 +1,6 @@
 ﻿namespace Masstransit.SagaPoc.Publisher.Infrastructure.MemoryDb.Services;
 
+using Masstransit.SagaPoc.Publisher.Application.Commons.Extensions;
 using Masstransit.SagaPoc.Publisher.Domain.Entities;
 using Masstransit.SagaPoc.Publisher.Domain.Repositories;
 using Masstransit.SagaPoc.Publisher.Infrastructure.MemoryDb.Interfaces;
@@ -13,8 +14,10 @@ internal sealed class CustomerRepository : ICustomerRepository
 
     public CustomerEntity? Get(Guid id)
     {
-        if (this.context.Customers.TryGetValue(id, out var customer))
+        if (this.context.Customers.TryGetValue(id, out var customerJson))
         {
+            var customer = customerJson.To<CustomerEntity>();
+
             return customer;
         }
 
@@ -22,13 +25,26 @@ internal sealed class CustomerRepository : ICustomerRepository
     }
 
     public IEnumerable<CustomerEntity> GetAll()
-        => this.context.Customers.Values;
+    {
+        var customers = new List<CustomerEntity>();
+
+        foreach (var (_, customerJson) in this.context.Customers)
+        {
+            var customer = customerJson.To<CustomerEntity>();
+
+            customers.Add(customer);
+        }
+
+        return customers;
+    }
 
     public void Save(CustomerEntity customer)
     {
-        if (this.context.Customers.TryAdd(customer.Id, customer) is false)
+        var customerJson = customer.ToJson();
+
+        if (this.context.Customers.TryAdd(customer.Id, customerJson) is false)
         {
-            this.context.Customers[customer.Id] = customer;
+            this.context.Customers[customer.Id] = customerJson;
         }
     }
 }
