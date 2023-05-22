@@ -21,10 +21,8 @@ services:
         value: /        
       - name: SERILOG__WRITETO__1__NAME
         value: Seq
-      - name: SERILOG__WRITETO__1__ARGS__HOSTNAMEORADDRESS
-        value: localhost
-      - name: SERILOG__WRITETO__1__ARGS__PORT
-        value: 9000
+      - name: SERILOG__WRITETO__1__ARGS__SERVERURL
+        value: http://localhost:9000         
     bindings:
     - port: 30000
       protocol: http
@@ -44,10 +42,8 @@ services:
         value: /        
       - name: SERILOG__WRITETO__1__NAME
         value: Seq
-      - name: SERILOG__WRITETO__1__ARGS__HOSTNAMEORADDRESS
-        value: localhost
-      - name: SERILOG__WRITETO__1__ARGS__PORT
-        value: 9000
+      - name: SERILOG__WRITETO__1__ARGS__SERVERURL
+        value: http://localhost:9000  
     bindings:
     - port: 30001
       protocol: http
@@ -67,10 +63,8 @@ services:
         value: /        
       - name: SERILOG__WRITETO__1__NAME
         value: Seq
-      - name: SERILOG__WRITETO__1__ARGS__HOSTNAMEORADDRESS
-        value: localhost
-      - name: SERILOG__WRITETO__1__ARGS__PORT
-        value: 9000
+      - name: SERILOG__WRITETO__1__ARGS__SERVERURL
+        value: http://localhost:9000  
     bindings:
     - port: 30002
       protocol: http

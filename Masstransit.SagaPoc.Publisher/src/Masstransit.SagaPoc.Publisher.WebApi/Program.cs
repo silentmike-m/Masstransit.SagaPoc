@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
     .AddEnvironmentVariables("CONFIG_");
 
-builder.Host.UseSerilog((ctx, lc) => lc
+builder.Host.UseSerilog((_, loggerConfiguration) => loggerConfiguration
     .ReadFrom.Configuration(builder.Configuration)
     .Enrich.WithProperty(nameof(ServiceConstants.ServiceName), ServiceConstants.ServiceName)
     .Enrich.WithProperty(nameof(ServiceConstants.ServiceVersion), ServiceConstants.ServiceVersion));
