@@ -14,7 +14,8 @@ internal static class DependencyInjection
 
         services.AddMassTransit(busConfiguration =>
         {
-            busConfiguration.AddConsumer<ProcessCustomerConsumer>();
+            //busConfiguration.AddConsumer<ProcessCustomerConsumer>();
+            busConfiguration.AddConsumer(typeof(ProcessCustomerConsumer), typeof(ProcessCustomerConsumerDefinition));
 
             busConfiguration.UsingRabbitMq((context, cfg) =>
             {
@@ -35,4 +36,10 @@ internal static class DependencyInjection
 
         return services;
     }
+}
+
+internal sealed class ProcessCustomerConsumerDefinition : ConsumerDefinition<ProcessCustomerConsumer>
+{
+    public ProcessCustomerConsumerDefinition()
+        => this.EndpointName = "process-customer-name";
 }

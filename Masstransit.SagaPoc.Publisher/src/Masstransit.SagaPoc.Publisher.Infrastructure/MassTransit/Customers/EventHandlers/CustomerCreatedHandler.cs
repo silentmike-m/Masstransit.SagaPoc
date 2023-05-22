@@ -3,6 +3,7 @@
 using global::MassTransit;
 using Masstransit.SagaPoc.Publisher.Application.Customers.Events;
 using Masstransit.SagaPoc.Publisher.Infrastructure.MassTransit.Customers.Models;
+using Masstransit.SagaPoc.Shared.Requests;
 
 internal sealed class CustomerCreatedHandler : INotificationHandler<CustomerCreated>
 {
@@ -28,6 +29,6 @@ internal sealed class CustomerCreatedHandler : INotificationHandler<CustomerCrea
             Name = notification.Name,
         };
 
-        await this.publishEndpoint.Publish(message, cancellationToken);
+        await this.publishEndpoint.Publish<IProcessCustomer>(message, cancellationToken);
     }
 }

@@ -5,7 +5,7 @@ using Masstransit.SagaPoc.Publisher.Domain.Repositories;
 
 internal sealed class UpdateCustomerAddressHandler : IRequestHandler<UpdateCustomerAddress>
 {
-    private const int WAIT_DURATION_IN_SECONDS = 5;
+    private const int WAIT_DURATION_IN_SECONDS = 2;
 
     private readonly ILogger<UpdateCustomerAddressHandler> logger;
     private readonly ICustomerRepository repository;
