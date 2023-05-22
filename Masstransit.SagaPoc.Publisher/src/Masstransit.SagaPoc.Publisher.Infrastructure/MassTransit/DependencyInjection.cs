@@ -2,6 +2,7 @@
 
 using System.Security.Authentication;
 using global::MassTransit;
+using Masstransit.SagaPoc.Publisher.Infrastructure.MassTransit.Customers.Consumers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,6 +14,9 @@ internal static class DependencyInjection
 
         services.AddMassTransit(busConfiguration =>
         {
+            busConfiguration.AddConsumer<CustomerAddressProcessedConsumer>();
+            busConfiguration.AddConsumer<CustomerNameProcessedConsumer>();
+
             busConfiguration.UsingRabbitMq((context, cfg) =>
             {
                 cfg.Host(rabbitMqSettings.HostName, rabbitMqSettings.Port, rabbitMqSettings.VirtualHost, host =>

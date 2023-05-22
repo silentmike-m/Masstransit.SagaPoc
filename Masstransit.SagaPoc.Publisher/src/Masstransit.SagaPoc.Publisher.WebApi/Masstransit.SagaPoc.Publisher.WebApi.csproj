@@ -21,8 +21,4 @@
         <ProjectReference Include="..\Masstransit.SagaPoc.Publisher.Infrastructure\Masstransit.SagaPoc.Publisher.Infrastructure.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-        <Folder Include="Controllers\" />
-    </ItemGroup>
-
 </Project>
