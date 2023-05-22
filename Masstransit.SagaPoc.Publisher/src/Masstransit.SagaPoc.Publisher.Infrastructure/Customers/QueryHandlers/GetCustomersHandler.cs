@@ -9,6 +9,12 @@ internal sealed class GetCustomersHandler : IRequestHandler<GetCustomers, Custom
     private readonly ILogger<GetCustomersHandler> logger;
     private readonly ICustomerReadService readService;
 
+    public GetCustomersHandler(ILogger<GetCustomersHandler> logger, ICustomerReadService readService)
+    {
+        this.logger = logger;
+        this.readService = readService;
+    }
+
     public async Task<Customers> Handle(GetCustomers request, CancellationToken cancellationToken)
     {
         this.logger.LogInformation("Try to get all customers");
