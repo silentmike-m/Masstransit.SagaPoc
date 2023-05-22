@@ -2,6 +2,7 @@
 
 using global::MassTransit;
 using Masstransit.SagaPoc.ClientA.Application.Customers.Events;
+using Message = Masstransit.SagaPoc.ClientA.Infrastructure.MassTransit.Customers.Models.CustomerNameProcessed;
 
 internal sealed class CustomerNameProcessedHandler : INotificationHandler<CustomerNameProcessed>
 {
@@ -18,7 +19,7 @@ internal sealed class CustomerNameProcessedHandler : INotificationHandler<Custom
     {
         this.logger.LogInformation("Try to send processed customer name with id {CustomerId} request", notification.Id);
 
-        var message = new CustomerNameProcessed
+        var message = new Message
         {
             FirstName = notification.FirstName,
             Id = notification.Id,

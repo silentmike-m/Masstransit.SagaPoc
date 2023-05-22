@@ -32,8 +32,8 @@ internal sealed class ProcessCustomerNameHandler : IRequestHandler<ProcessCustom
 
         if (isMatch.Success)
         {
-            firstName = isMatch.Groups["FIRST_NAME_REGEX_GROUP"].Value;
-            lastName = isMatch.Groups["LAST_NAME_REGEX_GROUP"].Value;
+            firstName = isMatch.Groups[FIRST_NAME_REGEX_GROUP].Value;
+            lastName = isMatch.Groups[LAST_NAME_REGEX_GROUP].Value;
         }
 
         var notification = new CustomerNameProcessed
