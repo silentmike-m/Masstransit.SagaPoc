@@ -51,7 +51,7 @@ services:
     bindings:
     - port: 30001
       protocol: http
-  - name: clientA
+  - name: clientB
     project: Masstransit.SagaPoc.ClientB/src/Masstransit.SagaPoc.ClientB.WebApi/Masstransit.SagaPoc.ClientB.WebApi.csproj
     buildProperties:
       - name: Configuration

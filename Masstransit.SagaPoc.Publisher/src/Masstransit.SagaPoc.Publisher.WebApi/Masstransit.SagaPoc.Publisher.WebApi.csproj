@@ -15,13 +15,13 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Serilog" Version="2.12.0" />
         <PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
+        <PackageReference Include="Serilog.Expressions" Version="3.4.1" />
         <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
+        <PackageReference Include="Serilog.Sinks.Seq" Version="5.2.2" />
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\Masstransit.SagaPoc.Publisher.Infrastructure\Masstransit.SagaPoc.Publisher.Infrastructure.csproj" />
     </ItemGroup>
-
 </Project>
