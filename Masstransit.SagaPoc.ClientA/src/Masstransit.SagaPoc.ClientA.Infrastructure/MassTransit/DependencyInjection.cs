@@ -3,6 +3,7 @@
 using System.Security.Authentication;
 using global::MassTransit;
 using Masstransit.SagaPoc.ClientA.Infrastructure.MassTransit.Customers.Consumers;
+using Masstransit.SagaPoc.Shared.Requests;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,8 +15,7 @@ internal static class DependencyInjection
 
         services.AddMassTransit(busConfiguration =>
         {
-            //busConfiguration.AddConsumer<ProcessCustomerConsumer>();
-            busConfiguration.AddConsumer(typeof(ProcessCustomerConsumer), typeof(ProcessCustomerConsumerDefinition));
+            busConfiguration.AddConsumer<ProcessCustomerConsumer>();
 
             busConfiguration.UsingRabbitMq((context, cfg) =>
             {
@@ -30,16 +30,32 @@ internal static class DependencyInjection
                     }
                 });
 
-                cfg.ConfigureEndpoints(context);
+                cfg.ReceiveEndpoint(endpointConfigurator =>
+                {
+                    endpointConfigurator.ConfigureConsumeTopology = false;
+                    endpointConfigurator.ConfigureConsumer<ProcessCustomerConsumer>(context);
+
+                    endpointConfigurator.Bind<IProcessCustomer>(configurator =>
+                    {
+                        configurator.RoutingKey = "name";
+                        configurator.ExchangeType = "topic";
+                    });
+                });
+
+                cfg.ReceiveEndpoint(endpointConfigurator =>
+                {
+                    endpointConfigurator.ConfigureConsumeTopology = false;
+                    endpointConfigurator.ConfigureConsumer<ProcessCustomerConsumer>(context);
+
+                    endpointConfigurator.Bind<IProcessCustomer>(configurator =>
+                    {
+                        configurator.RoutingKey = "customer";
+                        configurator.ExchangeType = "topic";
+                    });
+                });
             });
         });
 
         return services;
     }
-}
-
-internal sealed class ProcessCustomerConsumerDefinition : ConsumerDefinition<ProcessCustomerConsumer>
-{
-    public ProcessCustomerConsumerDefinition()
-        => this.EndpointName = "process-customer-name";
 }

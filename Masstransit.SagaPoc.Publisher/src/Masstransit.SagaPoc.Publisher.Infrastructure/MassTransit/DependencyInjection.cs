@@ -3,6 +3,8 @@
 using System.Security.Authentication;
 using global::MassTransit;
 using Masstransit.SagaPoc.Publisher.Infrastructure.MassTransit.Customers.Consumers;
+using Masstransit.SagaPoc.Shared.Extensions;
+using Masstransit.SagaPoc.Shared.Requests;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -30,10 +32,23 @@ internal static class DependencyInjection
                     }
                 });
 
+                cfg.Publish<IProcessCustomer>(e =>
+                {
+                    e.ExchangeType = "topic";
+                });
+
+                cfg.Send<IProcessCustomer>(message =>
+                {
+                    message.UseRoutingKeyFormatter(messageContext => messageContext.Message.GetRoutingKex());
+                });
+
                 cfg.ConfigureEndpoints(context);
             });
         });
 
         return services;
     }
+
+    private static string GetRoutingKey(string routingKey)
+        => $"quote.{routingKey}";
 }
