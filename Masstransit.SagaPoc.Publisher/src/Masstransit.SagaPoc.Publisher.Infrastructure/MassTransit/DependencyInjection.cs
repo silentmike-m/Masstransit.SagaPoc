@@ -2,7 +2,7 @@
 
 using System.Security.Authentication;
 using global::MassTransit;
-using Masstransit.SagaPoc.Publisher.Infrastructure.MassTransit.Customers.Consumers;
+using Masstransit.SagaPoc.Publisher.Infrastructure.MassTransit.Customers.Sagas;
 using Masstransit.SagaPoc.Shared.Extensions;
 using Masstransit.SagaPoc.Shared.Requests;
 using Microsoft.Extensions.Configuration;
@@ -16,8 +16,11 @@ internal static class DependencyInjection
 
         services.AddMassTransit(busConfiguration =>
         {
-            busConfiguration.AddConsumer<CustomerAddressProcessedConsumer>();
-            busConfiguration.AddConsumer<CustomerNameProcessedConsumer>();
+            //busConfiguration.AddConsumer<CustomerAddressProcessedConsumer>();
+            /// busConfiguration.AddConsumer<CustomerNameProcessedConsumer>();
+
+            busConfiguration.AddSagaStateMachine<CustomerStateMachine, CustomerState>()
+                .InMemoryRepository();
 
             busConfiguration.UsingRabbitMq((context, cfg) =>
             {
@@ -48,7 +51,4 @@ internal static class DependencyInjection
 
         return services;
     }
-
-    private static string GetRoutingKey(string routingKey)
-        => $"quote.{routingKey}";
 }
