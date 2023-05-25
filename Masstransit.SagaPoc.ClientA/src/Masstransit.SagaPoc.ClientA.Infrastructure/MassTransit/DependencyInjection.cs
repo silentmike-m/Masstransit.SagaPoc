@@ -6,6 +6,7 @@ using Masstransit.SagaPoc.ClientA.Infrastructure.MassTransit.Customers.Consumers
 using Masstransit.SagaPoc.Shared.Requests;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RabbitMQ.Client;
 
 internal static class DependencyInjection
 {
@@ -37,8 +38,8 @@ internal static class DependencyInjection
 
                     endpointConfigurator.Bind<IProcessCustomer>(configurator =>
                     {
-                        configurator.RoutingKey = "name";
-                        configurator.ExchangeType = "topic";
+                        configurator.RoutingKey = IProcessCustomer.NAME_ROUTING_KEY;
+                        configurator.ExchangeType = ExchangeType.Topic;
                     });
                 });
 
@@ -49,8 +50,8 @@ internal static class DependencyInjection
 
                     endpointConfigurator.Bind<IProcessCustomer>(configurator =>
                     {
-                        configurator.RoutingKey = "customer";
-                        configurator.ExchangeType = "topic";
+                        configurator.RoutingKey = IProcessCustomer.CUSTOMER_ROUTING_KEY;
+                        configurator.ExchangeType = ExchangeType.Topic;
                     });
                 });
             });

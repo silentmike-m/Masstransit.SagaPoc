@@ -7,6 +7,7 @@ using Masstransit.SagaPoc.Shared.Extensions;
 using Masstransit.SagaPoc.Shared.Requests;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RabbitMQ.Client;
 
 internal static class DependencyInjection
 {
@@ -16,8 +17,8 @@ internal static class DependencyInjection
 
         services.AddMassTransit(busConfiguration =>
         {
-            //busConfiguration.AddConsumer<CustomerAddressProcessedConsumer>();
-            /// busConfiguration.AddConsumer<CustomerNameProcessedConsumer>();
+            // busConfiguration.AddConsumer<CustomerAddressProcessedConsumer>();
+            // busConfiguration.AddConsumer<CustomerNameProcessedConsumer>();
 
             busConfiguration.AddSagaStateMachine<CustomerStateMachine, CustomerState>()
                 .InMemoryRepository();
@@ -37,7 +38,7 @@ internal static class DependencyInjection
 
                 cfg.Publish<IProcessCustomer>(e =>
                 {
-                    e.ExchangeType = "topic";
+                    e.ExchangeType = ExchangeType.Topic;
                 });
 
                 cfg.Send<IProcessCustomer>(message =>

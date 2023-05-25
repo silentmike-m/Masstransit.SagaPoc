@@ -4,10 +4,6 @@ using Masstransit.SagaPoc.Shared.Requests;
 
 public static class ProcessCustomerExtensions
 {
-    private const string ADDRESS_ROUTING_KEY = "address";
-    private const string CUSTOMER_ROUTING_KEY = "customer";
-    private const string NAME_ROUTING_KEY = "name";
-
     public static string GetRoutingKex(this IProcessCustomer self)
     {
         var isAddress = string.IsNullOrWhiteSpace(self.Address) is false;
@@ -15,9 +11,9 @@ public static class ProcessCustomerExtensions
 
         return isAddress switch
         {
-            true when isName => CUSTOMER_ROUTING_KEY,
-            true => ADDRESS_ROUTING_KEY,
-            _ => NAME_ROUTING_KEY,
+            true when isName => IProcessCustomer.CUSTOMER_ROUTING_KEY,
+            true => IProcessCustomer.ADDRESS_ROUTING_KEY,
+            _ => IProcessCustomer.NAME_ROUTING_KEY,
         };
     }
 }
